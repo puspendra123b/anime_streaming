@@ -82,9 +82,10 @@ export function Movies({ id, Pagename }) {
         `https://api-check-one-ecru.vercel.app/api/anime?page=${currentPage}`
       );
       setMovie(result.data);
-      setLoading(false);
     } catch (error) {
       setMovie([]);
+    } finally {
+      setLoading(false);
     }
   };
 
