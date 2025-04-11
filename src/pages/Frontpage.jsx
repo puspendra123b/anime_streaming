@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import logo from "/images/logo.png";
 
 import { Background } from "../components/Background";
 import TopBar from "../components/Topbar";
@@ -14,8 +15,18 @@ export function Frontpage() {
       <div className="p-12 -mt-20">
         <Template>
           <div className="col-span-2 md:col-span-1">
+          <img className="h-12 w-36 m-3" src={logo} alt="aniwatch" />
             <Search />
           </div>
+          <p className="text-white col-span-2 md:col-span-1">
+            <b>Top search: </b>{" "}
+            <i>
+              {" "}
+              Solo Leveling, One Piece, Ninja Kamui, Mashle: Magic andMuscles
+              Season 2, Jujutsu Kaisen 2nd Season, Naruto: Shippuden, Classroom
+              of the Elite III, Mashle: Magic and Muscles, Attack on Titan{" "}
+            </i>
+          </p>
         </Template>
       </div>
     </div>

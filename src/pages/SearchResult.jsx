@@ -1,18 +1,18 @@
 import { DetailsCard } from "../components/DetailsCard";
 import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
-import { SideTrey } from "../components/SIdeTray";
 import { PageName } from "../components/PageName";
 import Loader from "../components/Loader";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
-export function Movies({ id, Pagename }) {
-
+export function SearchResult({ id, Pagename }) {
   const [movie, setMovie] = useState([]);
   const [currentPage, setCurrentPage] = useState(3);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(true);
-
+  const location = useLocation()
+  const state = location.state
 
   const handlePageChange = (newPage) => {
     // if (newPage > 0 && newPage <= totalPages) {
@@ -22,11 +22,11 @@ export function Movies({ id, Pagename }) {
     // }
   };
 
-  const fetchMovies = async () => {
+  const fetchSearchAnime = async (title) => {
     setLoading(true);
     try {
       const result = await axios.get(
-        `https://api-check-one-ecru.vercel.app/api/anime?page=${currentPage}`
+        `https://api-check-one-ecru.vercel.app/api/anime/search?title=${title}`
       );
       setMovie(result.data);
     } catch (error) {
@@ -37,8 +37,8 @@ export function Movies({ id, Pagename }) {
   };
 
   useEffect(() => {
-    fetchMovies();
-  }, [currentPage]);
+    fetchSearchAnime(state.title)
+  }, []);
 
   return (
     <div className="bg-[#242424] h-full min-h-screen">
@@ -62,13 +62,6 @@ export function Movies({ id, Pagename }) {
       )}
 
       <div className="flex items-center justify-center space-x-2 mt-6">
-        {/* <button
-          onClick={() => handlePageChange(1)}
-          disabled={currentPage === 1}
-          className="px-4 py-2 rounded bg-indigo-600 text-white disabled:bg-gray-400 hover:bg-indigo-700 transition-colors"
-        >
-          First
-        </button> */}
 
         <button
           onClick={() => handlePageChange(currentPage - 1)}
@@ -80,7 +73,6 @@ export function Movies({ id, Pagename }) {
 
         <div className="px-4 py-2 bg-gray-100 rounded font-medium">
           Page {currentPage}
-          {/* of {totalPages} */}
         </div>
 
         <button
@@ -91,13 +83,6 @@ export function Movies({ id, Pagename }) {
           Next
         </button>
 
-        {/* <button
-          onClick={() => handlePageChange(totalPages)}
-          disabled={currentPage === totalPages}
-          className="px-4 py-2 rounded bg-indigo-600 text-white disabled:bg-gray-400 hover:bg-indigo-700 transition-colors"
-        >
-          Last
-        </button> */}
       </div>
     </div>
   );

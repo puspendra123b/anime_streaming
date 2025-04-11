@@ -1,17 +1,45 @@
+
 import logo from "/images/logo.png";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export function Search() {
+  const navigate = useNavigate();
+
+  const [title, setTitle] = useState("");
+
+  const handleClick = () => {
+    navigate(`/search?title${title}`, {
+      state: {
+        title: title,
+      },
+    });
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      console.log('Enter pressed!');
+      handleClick();
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center">
-      <img className="h-12 w-36 m-3" src={logo} alt="aniwatch" />
-      <div className="flex">
+      {/* <img className="h-12 w-36 m-3" src={logo} alt="aniwatch" /> */}
+      <div onKeyDown={handleKeyDown} className="flex">
         <input
           type="text"
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
           placeholder="Search anime..."
           className="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
 
-        <button className="bg-[#ffdd95] h-11 w-10 rounded-full flex justify-center items-center ml-1">
+        <button
+          onClick={handleClick}
+          className="bg-[#ffdd95] h-11 w-10 rounded-full flex justify-center items-center ml-1"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -30,7 +58,7 @@ export function Search() {
         </button>
       </div>
 
-      <p className="text-white">
+      {/* <p className="text-white">
         <b>Top search: </b>{" "}
         <i>
           {" "}
@@ -38,7 +66,7 @@ export function Search() {
           2, Jujutsu Kaisen 2nd Season, Naruto: Shippuden, Classroom of the
           Elite III, Mashle: Magic and Muscles, Attack on Titan{" "}
         </i>
-      </p>
+      </p> */}
     </div>
   );
 }
