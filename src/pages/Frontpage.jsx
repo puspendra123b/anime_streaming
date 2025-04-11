@@ -12,7 +12,7 @@ export function Frontpage() {
     <div className="bg-[#242424] h-full min-h-screen">
       <TopBar />
       <img className="h-72 w-full md:px-28" src={back} alt="background" />
-      <div className="p-12 -mt-20">
+      <div className="p-5 -mt-10">
         <Template>
           <div className="col-span-2 md:col-span-1">
           <img className="h-12 w-36 m-3" src={logo} alt="aniwatch" />
