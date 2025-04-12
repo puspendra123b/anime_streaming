@@ -9,6 +9,7 @@ import { Landing } from "./pages/Landing";
 import { Episodes } from "./pages/Episodes";
 import VideoPlayer from "./components/VideoPlayer";
 import { SearchResult } from "./pages/SearchResult";
+import { Trending } from "./pages/Trending";
 
 function App() {
   const page = [
@@ -25,7 +26,7 @@ function App() {
       name: 3,
     },
     {
-      id: "Top Airing",
+      id: "Trending",
       name: 4,
     },
     {
@@ -38,8 +39,8 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Frontpage />} />
-          <Route path="/home" element={<Card />} />
+          <Route path="/" element={<Trending key={page[3].name} id={page[3].id} />} />
+          <Route path="/home" element={<Frontpage />} />
           <Route
             path="/movies"
             element={<Movies key={page[0].name} id={page[0].id} />}
@@ -52,10 +53,10 @@ function App() {
             path="/most-popular"
             element={<Movies key={page[2].name} id={page[2].id} />}
           />
-          <Route
+          {/* <Route
             path="/top-airing"
-            element={<Movies key={page[3].name} id={page[3].id} />}
-          />
+            element={<Trending key={page[3].name} id={page[3].id} />}
+          /> */}
           <Route
             path="/search"
             element={<SearchResult key={page[4].name} id={page[4].id} />}

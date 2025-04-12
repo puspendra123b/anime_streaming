@@ -11,11 +11,11 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
 const navigation = [
-  { name: "Home", path: "/", current: true },
+  { name: "Home", path: "/home", current: true },
   { name: "Movies", path: "/movies", current: false },
   { name: "Tv Series", path: "/tv-series", current: false },
   { name: "Most Popular", path: "/most-popular", current: false },
-  { name: "Top Airing", path: "/top-airing", current: false },
+  { name: "Trending", path: "/", current: false },
 ];
 
 function classNames(...classes) {

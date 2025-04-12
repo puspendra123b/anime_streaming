@@ -14,7 +14,7 @@ export function Header() {
       <div className="flex justify-between items-center h-14 mt-0">
         <div>
           <img
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/home")}
             className="h-11 cursor-pointer"
             src={logo}
             alt="aniwatch"
