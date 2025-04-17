@@ -38,7 +38,7 @@ export function Search() {
 
         <button
           onClick={handleClick}
-          className="bg-[#ffdd95] h-11 w-10 rounded-full flex justify-center items-center ml-1"
+          className="bg-[#14ee9f] h-11 w-10 rounded-full flex justify-center items-center ml-1"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

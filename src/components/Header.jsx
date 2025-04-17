@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import logo from "/images/logo.png";
+import logo from "/images/anipieceLogo.png";
 import rikka from "/images/rikka.gif";
 import { Search } from "./Search";
 import { useState } from "react";
@@ -12,12 +12,12 @@ export function Header() {
   return (
     <div>
       <div className="flex justify-between items-center h-14 mt-0">
-        <div>
+        <div className="ml-3">
           <img
             onClick={() => navigate("/home")}
             className="h-11 cursor-pointer"
             src={logo}
-            alt="aniwatch"
+            alt="aniPiece"
           />
         </div>
         <div className="flex">
@@ -26,9 +26,14 @@ export function Header() {
               <Search />
             </div>
           ) : (
-            <button className="mr-5" onClick={()=>{
-              setIsSearch(true)
-            }}><CiSearch size={30} color="white" /></button>
+            <button
+              className="mr-5"
+              onClick={() => {
+                setIsSearch(true);
+              }}
+            >
+              <CiSearch size={30} color="white" />
+            </button>
           )}
 
           {/* <button
@@ -41,7 +46,7 @@ export function Header() {
       </div>
       <div className="h-24 flex items-center bg-black">
         <img className="h-14 rounded-full ml-4" src={rikka} alt="" />
-        <h4 className="text-[#ffdd95] text-lg md:text-xl font-semibold ml-4">
+        <h4 className="text-[#14ee9f] text-lg md:text-xl font-semibold ml-4">
           Share AniWatch To Your Friends
         </h4>
       </div>
