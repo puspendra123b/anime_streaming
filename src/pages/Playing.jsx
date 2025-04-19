@@ -15,9 +15,11 @@ export function Playing() {
   const [loading, setLoading] = useState(true);
   const [currentEp, setCurrentEp] = useState(state.episode);
 
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
   const itemsPerPage = 100; // Show 12 episodes per page
+  const [currentPage, setCurrentPage] = useState(
+    Math.ceil(parseInt(state.episode) / itemsPerPage -1)
+  );
+  const [totalPages, setTotalPages] = useState(0);
 
   const fetchEpisodes = async () => {
     setLoading(true);
@@ -108,18 +110,18 @@ export function Playing() {
                   </button>
                 ))}
               </div>
-                <div>
-                  {totalPages > 1 && (
-                    <div className="flex justify-center gap-2 mt-4">
-                      <button
-                        onClick={goToPrevPage}
-                        disabled={currentPage === 0}
-                        className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-                      >
-                        Previous
-                      </button>
+              <div>
+                {totalPages > 1 && (
+                  <div className="flex justify-center gap-2 mt-4">
+                    <button
+                      onClick={goToPrevPage}
+                      disabled={currentPage === 0}
+                      className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+                    >
+                      Previous
+                    </button>
 
-                      {/* <div className="flex gap-1">
+                    {/* <div className="flex gap-1">
                       {Array.from({ length: totalPages }, (_, i) => (
                         <button
                           key={i}
@@ -135,16 +137,16 @@ export function Playing() {
                       ))}
                     </div> */}
 
-                      <button
-                        onClick={goToNextPage}
-                        disabled={currentPage === totalPages - 1}
-                        className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-                      >
-                        Next
-                      </button>
-                    </div>
-                  )}
-                </div>
+                    <button
+                      onClick={goToNextPage}
+                      disabled={currentPage === totalPages - 1}
+                      className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
+              </div>
               <div className="grid grid-cols-3 md:px-20 pb-10 pt-5">
                 <div className="hidden md:block">
                   <img
