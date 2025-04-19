@@ -9,7 +9,7 @@ export function Recomended({ id, Pagename }) {
 
   const  fetchAnime = async (page)=> {
     try {
-      const result = await axios.get(`https://api-check-one-ecru.vercel.app/api/anime?page=${3}`)
+      const result = await axios.get(`https://api-check-one-ecru.vercel.app/api/anime?page=${4}`)
 
       if(result.status === 200){
         // fetchAnime(page+1)

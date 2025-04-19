@@ -15,6 +15,10 @@ export function Playing() {
   const [loading, setLoading] = useState(true);
   const [currentEp, setCurrentEp] = useState(state.episode);
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const itemsPerPage = 100; // Show 12 episodes per page
+
   const fetchEpisodes = async () => {
     setLoading(true);
     try {
@@ -22,6 +26,7 @@ export function Playing() {
         `https://api-check-one-ecru.vercel.app/api/episodes?title=${title}`
       );
       setEpisodes(result.data);
+      setTotalPages(Math.ceil(result.data.length / itemsPerPage));
     } catch (error) {
       setEpisodes([]);
     } finally {
@@ -43,6 +48,27 @@ export function Playing() {
 
   // console.log(extractedAndSorted);
 
+  // Get current page items
+  const getCurrentItems = () => {
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return extractedAndSorted.slice(startIndex, endIndex);
+  };
+
+  // Handle page changes
+  const goToPage = (page) => {
+    setCurrentPage(page);
+  };
+
+  // Handle next/prev navigation
+  const goToPrevPage = () => {
+    setCurrentPage((prev) => Math.max(0, prev - 1));
+  };
+
+  const goToNextPage = () => {
+    setCurrentPage((prev) => Math.min(totalPages - 1, prev + 1));
+  };
+
   return (
     <div className="bg-[#242424] h-full min-h-screen">
       <Header />
@@ -57,27 +83,68 @@ export function Playing() {
             <div className="col-span-2 mt-5">
               <div className="flex items-center justify-between mb-2 font-bold text-white">
                 <h5 className="ml-2">List of episodes: </h5>
-                <input
+                {/* <input
                   className="text-black font-normal p-1 rounded-md text-sm mr-2 h-6 w-24"
                   type="text"
                   placeholder="No. of episode"
-                />
+                /> */}
               </div>
               <div className="text-white grid grid-cols-5 sm:grid-cols-10 md:grid-cols-12 gap-4 w-full mt-4">
-                {extractedAndSorted.map((ep, key) => (
+                {getCurrentItems().map((ep, key) => (
                   <button
                     key={key}
                     onClick={() => {
                       setUrl(ep.embed_url);
                       setTitle(ep.title);
-                      setCurrentEp(ep.episode)
+                      setCurrentEp(ep.parsedEpisode);
                     }}
-                    className={`${currentEp == ep.parsedEpisode ? 'bg-red-400' : 'bg-slate-100'} text-black w-14 rounded-md place-content-center`}
+                    className={`${
+                      currentEp == ep.parsedEpisode
+                        ? "bg-red-400"
+                        : "bg-slate-100"
+                    } text-black w-14 rounded-md place-content-center`}
                   >
                     {ep.parsedEpisode}
                   </button>
                 ))}
               </div>
+                <div>
+                  {totalPages > 1 && (
+                    <div className="flex justify-center gap-2 mt-4">
+                      <button
+                        onClick={goToPrevPage}
+                        disabled={currentPage === 0}
+                        className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+                      >
+                        Previous
+                      </button>
+
+                      {/* <div className="flex gap-1">
+                      {Array.from({ length: totalPages }, (_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => goToPage(i)}
+                          className={`w-8 h-8 rounded ${
+                            currentPage === i
+                              ? "bg-blue-500 text-white"
+                              : "bg-gray-200"
+                          }`}
+                        >
+                          {i + 1}
+                        </button>
+                      ))}
+                    </div> */}
+
+                      <button
+                        onClick={goToNextPage}
+                        disabled={currentPage === totalPages - 1}
+                        className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+                      >
+                        Next
+                      </button>
+                    </div>
+                  )}
+                </div>
               <div className="grid grid-cols-3 md:px-20 pb-10 pt-5">
                 <div className="hidden md:block">
                   <img
@@ -87,7 +154,9 @@ export function Playing() {
                   />
                 </div>
                 <div className="md:col-span-2 col-span-3">
-                  <h1 className="text-white text-xl md:text-3xl mb-4 font-bold">{episodes[0].title}</h1>
+                  <h1 className="text-white text-xl md:text-3xl mb-4 font-bold">
+                    {episodes[0].title}
+                  </h1>
                   <h4 className="text-white">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     Itaque, ut. Quas, eius aspernatur eaque earum sed,
