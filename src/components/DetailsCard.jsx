@@ -9,7 +9,8 @@ export function DetailsCard({ prop }) {
             navigate("/watch/anime", {
               state: {
                 url: prop.embed_url,
-                title : prop.title
+                title : prop.title,
+                episode: prop.episode ? prop.episode : '1'
               },
             })
           }

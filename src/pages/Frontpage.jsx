@@ -12,15 +12,15 @@ export function Frontpage() {
   return (
     <div className="bg-[#242424] h-full min-h-screen">
       <TopBar />
-      <img className="h-72 w-full md:px-28" src={back} alt="background" />
-      <div className="p-5 -mt-10">
+      <img className="h-72 w-full md:px-56" src={back} alt="background" />
+      <div className="p-5 -mt-10 md:mx-[200px]">
         <Template>
-          <div className="col-span-2 md:col-span-1">
+          <div className="col-span-2">
           {/* <img className="h-12 w-36 m-3" src={logo} alt="aniwatch" /> */}
       <Logo />
             <Search />
           </div>
-          <p className="text-white col-span-2 md:col-span-1">
+          <p className="text-white col-span-2">
             <b>Top search: </b>{" "}
             <i>
               {" "}

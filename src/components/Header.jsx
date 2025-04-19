@@ -47,7 +47,7 @@ export function Header() {
       <div className="h-24 flex items-center bg-black">
         <img className="h-14 rounded-full ml-4" src={rikka} alt="" />
         <h4 className="text-[#14ee9f] text-lg md:text-xl font-semibold ml-4">
-          Share AniWatch To Your Friends
+          Share AniPiece To Your Friends
         </h4>
       </div>
     </div>

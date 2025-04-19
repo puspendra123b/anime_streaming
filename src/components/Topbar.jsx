@@ -54,7 +54,7 @@ export default function TopBar() {
                     key={item.name}
                     aria-current={item.current ? "page" : undefined}
                     className={`text-white hover:bg-gray-700 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium`}
+                      'rounded-md px-3 py-2 text-sm font-medium cursor-pointer`}
                   >
                     {item.name}
                   </a>
@@ -133,7 +133,7 @@ export default function TopBar() {
                 item.current
                   ? "bg-gray-900 text-white"
                   : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                "block rounded-md px-3 py-2 text-base font-medium"
+                "block rounded-md px-3 py-2 text-base font-medium cursor-pointer"
               )}
             >
               {item.name}

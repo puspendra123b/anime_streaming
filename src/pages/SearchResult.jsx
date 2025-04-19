@@ -41,7 +41,7 @@ export function SearchResult({ id, Pagename }) {
   }, []);
 
   return (
-    <div className="bg-[#242424] h-full min-h-screen">
+    <div className="bg-[#242424] h-full min -h-screen">
       <Header />
 
       {loading ? (
